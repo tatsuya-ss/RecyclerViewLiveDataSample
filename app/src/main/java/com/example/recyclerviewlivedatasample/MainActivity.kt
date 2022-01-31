@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupViewModel()
         setupButton()
--
+
     }
 
     private fun setupBinding() {
