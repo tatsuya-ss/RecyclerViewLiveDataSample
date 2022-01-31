@@ -9,8 +9,7 @@ import com.example.recyclerviewlivedatasample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-//    private val viewModel = MainViewModel()
-    private var todo = MutableLiveData<List<String>>()
+    private val viewModel = MainViewModel()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,18 +29,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupButton() {
         binding.button.setOnClickListener {
-            todo.value = listOf("宿題", "Kotlin", "AAA")
+            viewModel.addItem("追加")
         }
     }
 
     private fun setupRecyclerView() {
         binding.RecyclerView.adapter = RecyclerViewAdapter()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
-
     }
 
     private fun setupViewModel() {
-        todo.observe(this, Observer {
+        viewModel.todo.observe(this, Observer {
             val adapter = binding.RecyclerView.adapter as RecyclerViewAdapter
             adapter.setItem(it)
             println("debug, $it")
